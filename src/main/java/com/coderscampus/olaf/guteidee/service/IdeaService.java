@@ -97,7 +97,7 @@ public class IdeaService {
 			return getUserIdeas(user, "").stream().anyMatch(idea -> idea.getId() == ideaId);
 	}
 
-	public void deleteIdea(Idea idea, Long ideaId) {
+	public void deleteIdea(Long ideaId) {
 		ideaRepo.deleteById(ideaId);		
 	}
 

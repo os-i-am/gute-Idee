@@ -89,7 +89,7 @@ public class User {
 		this.likes = likes;
 	}
 
-	@OneToMany(mappedBy = "user", fetch=FetchType.LAZY, cascade = { CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE })
+	@OneToMany(mappedBy = "user", fetch=FetchType.LAZY, cascade = { CascadeType.MERGE, CascadeType.PERSIST}, orphanRemoval = true)
 	public Set<Authority> getAuthorities() {
 		return authorities;
 	}

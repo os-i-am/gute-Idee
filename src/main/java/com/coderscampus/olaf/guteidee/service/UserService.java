@@ -86,8 +86,7 @@ public class UserService {
 	}
 
 	public void deleteUser(User inputUser) {
-		System.out.println("delete user");
-
+		userRepo.delete(inputUser);
 	}
 
 	public User findById(Long userId) {
