@@ -33,8 +33,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	User findByIdWithRoles(Long userId);
 	
 	@Query("select u from User u"
-			+ " left join fetch u.likes"
 			+ " left join fetch u.ideas"
+			+ " left join fetch u.likes"
 			+ " left join fetch u.authorities"
 			+ " where u.id = :userId")
 	User findUserByIdWithIdeasAndLikesAndAuthorities(Long userId);

@@ -14,6 +14,7 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
 	Category findByTitle(String title);
 
 	@Query("select distinct c from Category c"
+			+ " left join fetch c.ideas"
 			+ " order by c.id asc")
 	Set<Category> findAllCategories();
 

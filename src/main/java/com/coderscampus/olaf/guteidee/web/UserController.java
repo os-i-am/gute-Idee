@@ -105,14 +105,14 @@ public class UserController {
 			return "accessDenied";
 	}
 	
-	@PostMapping("/user/editUser")
-	public String postEditUser(User inputUser) {
-		userService.editUserDetails(inputUser);
+	@PostMapping("/user/editUser/{userId}")
+	public String postEditUser(User inputUser, @PathVariable Long userId) {
+		userService.editUserDetails(inputUser, userId);
 		return "redirect:/user";
 	}
 	
-	@PostMapping("/admin/deleteUser")
-	public String postDeleteUser(User inputUser) {
+	@PostMapping("/admin/deleteUser/{userId}")
+	public String postDeleteUser(User inputUser, @PathVariable Long userId) {
 		userService.deleteUser(inputUser);
 		return "redirect:/admin/listAllUsers";
 	}
@@ -124,8 +124,14 @@ public class UserController {
 	}
 
 	@GetMapping("/accessDenied")
-	public String getAccessDenied(ModelMap model) {
+	public String getAccessDenied() {
 		return "accessDenied";
+	}
+	
+	@GetMapping("/about")
+	public String getAboutPage(@AuthenticationPrincipal User user, ModelMap model) {
+		model.put("user", user);
+		return "about";
 	}
 
 }

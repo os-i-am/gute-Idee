@@ -71,17 +71,14 @@ public class UserService {
 		return userRepo.findById(userId).orElse(new User()).getName();
 	}
 
-	public User editUserDetails(User inputUser) {
-		User user = userRepo.findUserByIdWithIdeasAndLikesAndAuthorities(inputUser.getId());
-		user.setId(inputUser.getId());
+	public User editUserDetails(User inputUser, Long userId) {
+		User user = userRepo.findUserByIdWithIdeasAndLikesAndAuthorities(userId);
+		user.setUsername(inputUser.getUsername());
+		user.setName(inputUser.getName());
 		if (user.getPassword().equals(inputUser.getPassword()))
 			user.setPassword(inputUser.getPassword());
 		else
 			user.setPassword(encoder.encode(inputUser.getPassword()));
-		user.setName(inputUser.getName());
-		user.setIdeas(inputUser.getIdeas());
-		user.setLikes(inputUser.getLikes());
-		user.setAuthorities(inputUser.getAuthorities());
 		return userRepo.save(user);
 	}
 

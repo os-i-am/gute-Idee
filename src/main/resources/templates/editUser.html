@@ -16,20 +16,18 @@
   <div class="container py-4">
     <div class="row justify-content-center">
       <div class="col-4">
-        <form class="form-floating" action="/user/editUser/"
+        <form class="form-floating" action=""
           method="post" th:object="${editUser}">
           <input type="hidden" id="csrf"
             th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+          <input class="form-control" type="hidden" name="id" id="id"
+            th:value="${editUser.id}" />
           <fieldset>
             <legend id="categoryHeadline" class="h5 mb-3 fw-normal"
               th:text="'Edit User: ' + ${editUser.name}">Edit
               User:</legend>
             <small class="text-muted"
               th:text="'User ID: ' + ${editUser.Id}"></small>
-            <p>
-              <input class="form-control" type="hidden" name="id"
-                id="id" th:value="${editUser.id}" />
-            </p>
             <p>
               <input class="form-control" type="text" name="username"
                 id="username" th:value="${editUser.username}"
@@ -58,35 +56,30 @@
             </p>
             <hr>
             <div sec:authorize="hasRole('ADMIN')">
-              <h5 id="categoryHeadline" class="h5 mb-3 fw-normal">Edit
-                Roles:</h5>
-
-              <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox"
-                  name="authorities" th:text="'Admin'"
-                  th:value="${isAdmin}" th:field="*{authorities}"/>
+               <h5 class="mb-0">Toggle this user's Role</h5>
+               <small class="text-muted" th:text="'current role: '"></small>
+               <small th:if="${isAdmin}" class="text-danger">ADMIN</small>
+               <small th:unless="${isAdmin}" class="text-success">USER</small>
+               <div></div><a th:if="${isAdmin}" 
+              class="btn btn-outline-danger mt-3" id="removeAdmin"> remove ADMIN role</a>
+              <a th:unless="${isAdmin}" 
+              class="btn btn-outline-success mt-3" id="addAdmin"> add ADMIN role</a>
               </div>
-              
-              
               <hr>
-            </div>
-            <div>
+
               <span>
                 <button type="submit" class="btn btn-primary"
                   name="action" value="update">Update Details</button>
               </span><span>
                 <button type="reset" class="btn btn-outline-warning"
                   name="action" value="reset" id="reset">Reset
-                  Form</button>
-              </span> <span sec:authorize="hasRole('ADMIN')"> <span
-                th:unless="${user.id} == ${editUser.id}">
+                  Form</button></span><span th:unless="${user.id} == ${editUser.id}">
                   <button type="submit" class="btn btn-outline-danger"
                     name="action" value="delete"
-                    th:formaction="'/admin/deleteUser/'">Delete
+                    th:formaction="'/user/deleteUser/' + ${editUser.id}">Delete
                     User</button>
               </span>
-              </span>
-            </div>
+             
           </fieldset>
         </form>
       </div>

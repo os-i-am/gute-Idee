@@ -4,6 +4,18 @@ var nameTextbox = document.querySelector('#name')
 var passwordTextbox = document.querySelector('#password')
 var verifyPasswordTextbox = document.querySelector('#verifyPassword')
 var resetBtn = document.querySelector('#reset')
+var removeAdminBtn = document.querySelector('#removeAdmin')
+var addAdminBtn = document.querySelector('#addAdmin')
+
+//removeAdminBtn.addEventListener('click', () => {
+//  
+//  
+//})
+//
+//addAdminBtn.addEventListener('click', () => {
+//  
+//  
+//})
 
 usernameTextbox.addEventListener('blur', () => {
   if (usernameTextbox.value != '' 
