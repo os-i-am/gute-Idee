@@ -25,17 +25,17 @@ public class IdeaService {
 		return ideaRepo.findAllIdeas();
 	}
 
+	public Idea CreateEmptyIdeaWithCategories() {
+		Idea idea = new Idea();
+		idea.setCategories(categoryService.getAllCategories());
+		return idea;
+	}
+
 	public Idea saveNewIdea(User user, Idea idea) {
 		idea.setCompleted(false);
 		idea.setUser(user);
 		return ideaRepo.save(idea);
 
-	}
-
-	public Idea CreateEmptyIdeaWithCategories() {
-		Idea idea = new Idea();
-		idea.setCategories(categoryService.getAllCategories());
-		return idea;
 	}
 
 	public Set<Idea> getUserIdeas(User user, String filter) {
@@ -95,6 +95,10 @@ public class IdeaService {
 			return true;
 		else
 			return getUserIdeas(user, "").stream().anyMatch(idea -> idea.getId() == ideaId);
+	}
+
+	public void deleteIdea(Idea idea, Long ideaId) {
+		ideaRepo.deleteById(ideaId);		
 	}
 
 }

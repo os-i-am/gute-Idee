@@ -62,10 +62,19 @@
                 th:id="completed" th:value="${idea.completed}"
                 th:field="${idea.completed}" />
             </div>
-            <div>
-              <button type="submit" id="submit"
-                class="btn btn-primary mt-3">Update Idea</button>
-            </div>
+            <hr>
+            <span>
+              <button type="submit" id="submit" class="btn btn-primary">Update
+                Idea</button>
+            </span><span>
+              <button type="reset" class="btn btn-outline-warning"
+                name="action" value="reset" id="reset">Reset
+                Form</button>
+            </span> <span>
+              <button type="submit" class="btn btn-outline-danger"
+                name="action" value="delete"
+                th:formaction="'/user/deleteIdea/' + ${idea.id}">Delete Idea</button>
+            </span>
 
           </fieldset>
         </form>

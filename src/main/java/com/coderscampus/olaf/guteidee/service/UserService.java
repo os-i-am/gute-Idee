@@ -1,6 +1,6 @@
 package com.coderscampus.olaf.guteidee.service;
 
-import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -36,13 +36,8 @@ public class UserService {
 		return (userRepo.findByUsername(user.getUsername()) != null);
 	}
 
-	public List<User> getAllUsers() {
-		return userRepo.findAll();
-	}
-
-	public List<User> getAllUsersWithRoles() {
-
-		return userRepo.findAllUsersWithRoles();
+	public Set<User> getAllUsersWithRolesAndIdeas() {
+		return userRepo.findAllUsersWithRolesAndIdeas();
 	}
 
 	public User getSingleUserWithRoles(Long userId) {
@@ -90,7 +85,7 @@ public class UserService {
 		return userRepo.save(user);
 	}
 
-	public void deleteUserDetails(User inputUser) {
+	public void deleteUser(User inputUser) {
 		System.out.println("delete user");
 
 	}

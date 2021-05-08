@@ -29,10 +29,11 @@
               <span class="text-danger" th:text="'Admin'"></span>
           </span>
           </span>
-          <p>
-            <a class="btn btn-outline-warning mt-2"
+          <div class="mt-2"><small class="text-muted" th:text="${aUser.name} + ' has published ' + ${#lists.size(aUser.ideas)} + ' idea(s) so far.'"></small></div>
+          <hr>
+            <a class="btn btn-outline-warning"
               th:href="@{'/user/editUser/' + ${aUser.id}}">Edit User</a>
-          </p>
+
         </div>
       </div>
     </div>

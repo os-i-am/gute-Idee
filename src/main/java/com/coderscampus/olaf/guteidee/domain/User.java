@@ -71,7 +71,7 @@ public class User {
 		this.name = name;
 	}
 
-	@OneToMany(mappedBy = "user", fetch=FetchType.LAZY, cascade = { CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE })
+	@OneToMany(mappedBy = "user", fetch=FetchType.LAZY, cascade = { CascadeType.MERGE, CascadeType.PERSIST}, orphanRemoval = true)
 	public Set<Idea> getIdeas() {
 		return ideas;
 	}
@@ -80,7 +80,7 @@ public class User {
 		this.ideas = ideas;
 	}
 
-	@OneToMany(mappedBy = "primaryKey.user", fetch=FetchType.LAZY, cascade = { CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE })
+	@OneToMany(mappedBy = "primaryKey.user", fetch=FetchType.LAZY, cascade = { CascadeType.MERGE, CascadeType.PERSIST}, orphanRemoval = true)
 	public Set<Like> getLikes() {
 		return likes;
 	}

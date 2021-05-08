@@ -88,7 +88,7 @@ public class UserController {
 	@GetMapping("/admin/listAllUsers")
 	public String listAllUsers(@AuthenticationPrincipal User user, ModelMap model) {
 		model.put("user", user);
-		model.put("users", userService.getAllUsersWithRoles());
+		model.put("users", userService.getAllUsersWithRolesAndIdeas());
 		return "listAllUsers";
 	}
 
@@ -105,16 +105,16 @@ public class UserController {
 			return "accessDenied";
 	}
 	
-	@PostMapping("/user/editUser/")
+	@PostMapping("/user/editUser")
 	public String postEditUser(User inputUser) {
 		userService.editUserDetails(inputUser);
 		return "redirect:/user";
 	}
 	
-	@PostMapping("/user/deleteUser/")
+	@PostMapping("/admin/deleteUser")
 	public String postDeleteUser(User inputUser) {
-		userService.deleteUserDetails(inputUser);
-		return "redirect:/admin";
+		userService.deleteUser(inputUser);
+		return "redirect:/admin/listAllUsers";
 	}
 
 	@PostMapping("/user/likeIdea")

@@ -65,8 +65,14 @@ public class IdeaController {
 	}
 
 	@PostMapping("/user/editIdea/{ideaId}")
-	public String UpdateIdea(@AuthenticationPrincipal User user, @PathVariable Long ideaId, Idea idea) {
+	public String updateIdea(@AuthenticationPrincipal User user, @PathVariable Long ideaId, Idea idea) {
 		ideaService.updateIdea(idea, ideaId);
+		return "redirect:/user";
+	}
+	
+	@PostMapping("/user/deleteIdea/{ideaId}")
+	public String deleteIdea(@AuthenticationPrincipal User user, @PathVariable Long ideaId, Idea idea) {
+		ideaService.deleteIdea(idea, ideaId);
 		return "redirect:/user";
 	}
 

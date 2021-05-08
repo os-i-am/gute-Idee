@@ -1,6 +1,6 @@
 package com.coderscampus.olaf.guteidee.repository;
 
-import java.util.List;
+import java.util.Set;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -14,8 +14,7 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
 	Category findByTitle(String title);
 
 	@Query("select distinct c from Category c"
-			+ " left join fetch c.ideas"
 			+ " order by c.id asc")
-	List<Category> findAllOrdered();
+	Set<Category> findAllCategories();
 
 }

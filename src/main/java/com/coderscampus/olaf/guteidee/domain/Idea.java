@@ -1,9 +1,7 @@
 package com.coderscampus.olaf.guteidee.domain;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -33,7 +31,7 @@ public class Idea {
 	private LocalDateTime creationDate;
 	private Boolean completed;
 	private Set<Like> likes = new HashSet<>();
-	private List<Category> categories = new ArrayList<>();
+	private Set<Category> categories = new HashSet<>();
 
 	public Idea() {
 	}
@@ -103,7 +101,7 @@ public class Idea {
 		this.completed = completed;
 	}
 
-	@OneToMany(mappedBy = "primaryKey.idea", fetch=FetchType.LAZY, cascade = { CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE })
+	@OneToMany(mappedBy = "primaryKey.idea", fetch=FetchType.LAZY, cascade = { CascadeType.MERGE, CascadeType.PERSIST}, orphanRemoval = true)
 	public Set<Like> getLikes() {
 		return likes;
 	}
@@ -112,14 +110,14 @@ public class Idea {
 		this.likes = likes;
 	}
 
-	@ManyToMany(fetch=FetchType.LAZY, cascade = { CascadeType.MERGE, CascadeType.REMOVE })
+	@ManyToMany(fetch=FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinTable(name = "idea_category", joinColumns = @JoinColumn(name = "idea_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
-	public List<Category> getCategories() {
+	public Set<Category> getCategories() {
 		return categories;
 	}
 
-	public void setCategories(List<Category> list) {
-		this.categories = list;
+	public void setCategories(Set<Category> set) {
+		this.categories = set;
 	}
 
 	@Override

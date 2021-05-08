@@ -1,6 +1,6 @@
 package com.coderscampus.olaf.guteidee.service;
 
-import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,8 +13,8 @@ public class CategoryService {
 	@Autowired
 	private CategoryRepository categoryRepo;
 
-	public List<Category> getAllCategories() {
-		return categoryRepo.findAllOrdered();
+	public Set<Category> getAllCategories() {
+		return categoryRepo.findAllCategories();
 	}
 
 	public Category createCategory(Category category) {
@@ -26,7 +26,6 @@ public class CategoryService {
 	}
 
 	public void deleteCategory(Category category) {
-		System.out.println(category);
 		categoryRepo.delete(category);
 	}
 

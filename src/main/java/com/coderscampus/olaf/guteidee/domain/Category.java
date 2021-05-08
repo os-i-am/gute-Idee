@@ -40,7 +40,7 @@ public class Category {
 		this.title = title;
 	}
 
-	@ManyToMany(mappedBy = "categories", fetch=FetchType.LAZY, cascade = { CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE })
+	@ManyToMany(mappedBy = "categories", fetch=FetchType.LAZY, cascade = { CascadeType.MERGE, CascadeType.PERSIST})
 	public Set<Idea> getIdeas() {
 		return ideas;
 	}
