@@ -94,4 +94,19 @@ public class UserService {
 		return editUser.getAuthorities().stream().anyMatch(role -> role.getAuthority().equals("ROLE_ADMIN"));
 	}
 
+	public Boolean toggleAdmin(Long userId, Boolean isAdmin) {
+		User user = userRepo.findByIdWithRoles(userId);
+		if (isAdmin == false) {
+			user.getAuthorities().add(new Authority("ROLE_ADMIN", user));
+			userRepo.save(user);
+			return true;
+		} else {
+			Authority admin = user.getAuthorities().stream().filter(auth -> auth.getAuthority().equals("ROLE_ADMIN"))
+					.findFirst().orElse(null);
+			user.getAuthorities().remove(admin);
+			userRepo.save(user);
+			return false;
+		}
+	}
+
 }

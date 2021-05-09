@@ -16,8 +16,8 @@
   <div class="container py-4">
     <div class="row justify-content-center">
       <div class="col-4">
-        <form class="form-floating" action=""
-          method="post" th:object="${editUser}">
+        <form class="form-floating" action="" method="post"
+          th:object="${editUser}">
           <input type="hidden" id="csrf"
             th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
           <input class="form-control" type="hidden" name="id" id="id"
@@ -55,31 +55,33 @@
                 Password (leave as is to keep current)</label>
             </p>
             <hr>
+            <input type="hidden" id="adminMode" th:value="${adminMode}" />
             <div sec:authorize="hasRole('ADMIN')">
-               <h5 class="mb-0">Toggle this user's Role</h5>
-               <small class="text-muted" th:text="'current role: '"></small>
-               <small th:if="${isAdmin}" class="text-danger">ADMIN</small>
-               <small th:unless="${isAdmin}" class="text-success">USER</small>
-               <div></div><a th:if="${isAdmin}" 
-              class="btn btn-outline-danger mt-3" id="removeAdmin"> remove ADMIN role</a>
-              <a th:unless="${isAdmin}" 
-              class="btn btn-outline-success mt-3" id="addAdmin"> add ADMIN role</a>
+              <input type="hidden" id="editUserIsAdmin"
+                th:value="${editUserIsAdmin}" />
+              <h5 class="mb-0">Toggle this user's Role</h5>
+              <div class="form-check form-switch mt-3">
+                <input class="form-check-input" type="checkbox"
+                  id="toggleRole" th:checked="${editUserIsAdmin}"> <label
+                  class="form-check-label" for="toggleRole" th:text="'ADMIN'">ROLE</label>
               </div>
-              <hr>
+            </div>
+            <hr>
 
-              <span>
-                <button type="submit" class="btn btn-primary"
-                  name="action" value="update">Update Details</button>
-              </span><span>
-                <button type="reset" class="btn btn-outline-warning"
-                  name="action" value="reset" id="reset">Reset
-                  Form</button></span><span th:unless="${user.id} == ${editUser.id}">
-                  <button type="submit" class="btn btn-outline-danger"
-                    name="action" value="delete"
-                    th:formaction="'/user/deleteUser/' + ${editUser.id}">Delete
-                    User</button>
-              </span>
-             
+            <span>
+              <button type="submit" class="btn btn-primary"
+                name="action" value="update">Update Details</button>
+            </span><span>
+              <button type="reset" class="btn btn-outline-warning"
+                name="action" value="reset" id="reset">Reset
+                Form</button>
+            </span><span th:unless="${user.id} == ${editUser.id}">
+              <button type="submit" class="btn btn-outline-danger"
+                name="action" value="delete"
+                th:formaction="'/admin/deleteUser/' + ${editUser.id}">Delete
+                User</button>
+            </span>
+
           </fieldset>
         </form>
       </div>

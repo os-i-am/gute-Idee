@@ -99,7 +99,8 @@ public class UserController {
 			User editUser = userService.getSingleUserWithRoles(userId);
 			model.put("editUser", editUser);
 			Boolean isAdmin = userService.checkForAdmin(editUser);
-			model.put("isAdmin", isAdmin);
+			model.put("editUserIsAdmin", isAdmin);
+			model.put("adminMode", request.isUserInRole("ROLE_ADMIN"));
 			return "editUser";
 		} else
 			return "accessDenied";
@@ -109,6 +110,12 @@ public class UserController {
 	public String postEditUser(User inputUser, @PathVariable Long userId) {
 		userService.editUserDetails(inputUser, userId);
 		return "redirect:/user";
+	}
+	
+	@PostMapping("/admin/toggleAdmin/{userId}")
+	@ResponseBody
+	public Boolean postToggleAdmin(@PathVariable Long userId, @RequestBody Boolean isAdmin) {
+		return userService.toggleAdmin(userId, isAdmin);		
 	}
 	
 	@PostMapping("/admin/deleteUser/{userId}")

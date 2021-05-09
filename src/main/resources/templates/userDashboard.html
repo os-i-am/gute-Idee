@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://thymeleaf.org">
+<html lang="en" xmlns:th="https://thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <title>Gute Idee!</title>
 <meta charset="utf-8">
@@ -15,20 +16,24 @@
   <div th:replace="fragments :: header"></div>
   <div class="container py-4">
     <div class="row">
-      <div class="col-4">
+      <div class="col-6">
         <h3 class="mb-3 fw-normal"
           th:text="'Welcome back,  ' + ${user.name} + '!'">user
           Dashboard</h3>
         <hr>
         <span class="col-6">
           <span>
-            <a class="btn btn-primary" th:href="@{'/user/createIdea'}">New
+            <a class="btn btn-primary mb-2" th:href="@{'/user/createIdea'}">New
               Gute Idee!</a>
           </span>
           <span>
-            <a class="btn btn-outline-warning"
+            <a class="btn btn-outline-warning mb-2"
               th:href="@{'/user/editUser/' + ${user.id}}">Edit your
               Details</a>
+          </span>
+          <span sec:authorize="hasRole('ADMIN')">
+            <a class="btn btn-outline-danger mb-2"
+              th:href="@{'/admin'}"><i class="bi bi-gear"></i> Admin Panel</a>
           </span>
         </span>
       </div>

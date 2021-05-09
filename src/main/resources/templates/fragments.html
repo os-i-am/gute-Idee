@@ -39,7 +39,7 @@
                 th:href="@{'/user'}"
                 th:text="${user.name} + '\'s Profile'">Dashboard</a> <a
                 sec:authorize="hasRole('ADMIN')"
-                class="col-sm-auto text-primary text-decoration-none"
+                class="col-sm-auto text-danger text-decoration-none"
                 th:href="@{'/admin'}" th:text="'Admin Panel'">Admin
                 Dashboard</a>
               <div class="col-sm-auto">
@@ -47,7 +47,7 @@
                   <input type="hidden" th:name="${_csrf.parameterName}"
                     th:value="${_csrf.token}" />
                   <button type="submit"
-                    class="btn btn-outline-danger me-2">logout</button>
+                    class="btn btn-outline-primary me-2">logout</button>
                 </form>
               </div>
             </div>
