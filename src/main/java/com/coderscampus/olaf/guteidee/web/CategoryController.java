@@ -31,6 +31,8 @@ public class CategoryController {
 	public String getAdminDashboard(@AuthenticationPrincipal User user, ModelMap model) {
 		model.put("user", user);
 		model.put("newCategory", new Category());
+		if (categoryService.getAllCategories().isEmpty())
+			categoryService.createCategory(new Category("Good Ideas"));
 		model.put("categories", categoryService.getAllCategories());
 		return "editCategories";
 	}

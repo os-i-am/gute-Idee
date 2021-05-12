@@ -5,6 +5,7 @@ package com.coderscampus.olaf.guteidee.web;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -79,12 +80,14 @@ public class UserController {
 		return "userIdeas";
 	}
 
+	@Secured("ROLE_ADMIN")
 	@GetMapping("/admin")
 	public String getAdminDashboard(@AuthenticationPrincipal User user, ModelMap model) {
 		model.put("user", user);
 		return "adminDashboard";
 	}
 
+	@Secured("ROLE_ADMIN")
 	@GetMapping("/admin/listAllUsers")
 	public String listAllUsers(@AuthenticationPrincipal User user, ModelMap model) {
 		model.put("user", user);
@@ -111,19 +114,20 @@ public class UserController {
 		userService.editUserDetails(inputUser, userId);
 		return "redirect:/user";
 	}
-	
+	@Secured("ROLE_ADMIN")
 	@PostMapping("/admin/toggleAdmin/{userId}")
 	@ResponseBody
 	public Boolean postToggleAdmin(@PathVariable Long userId, @RequestBody Boolean isAdmin) {
 		return userService.toggleAdmin(userId, isAdmin);		
 	}
 	
+	@Secured("ROLE_ADMIN")
 	@PostMapping("/admin/deleteUser/{userId}")
 	public String postDeleteUser(User inputUser, @PathVariable Long userId) {
 		userService.deleteUser(inputUser);
 		return "redirect:/admin/listAllUsers";
 	}
-
+	
 	@PostMapping("/user/likeIdea")
 	public String postlikeIdea(@AuthenticationPrincipal User user, Long ideaId, Boolean liked) {
 		userService.likeIdea(ideaId, user, liked);

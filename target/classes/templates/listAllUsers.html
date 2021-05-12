@@ -23,10 +23,9 @@
           <span th:text="'Roles: '"></span> <span
             th:each="aAuthority: ${aUser.authorities}"> <span
             th:if="${aAuthority.authority == 'ROLE_USER'}"> <span
-              class="text-success" th:text="'User'"></span>
+              class="text-success" th:text="' User'"></span>
           </span> <span th:if="${aAuthority.authority == 'ROLE_ADMIN'}">
-              <span class="text-muted" th:text="' | '"></span>
-              <span class="text-danger" th:text="'Admin'"></span>
+              <span class="text-danger" th:text="' Admin'"></span>
           </span>
           </span>
           <div class="mt-2"><small class="text-muted" th:text="${aUser.name} + ' has published ' + ${#lists.size(aUser.ideas)} + ' idea(s) so far.'"></small></div>

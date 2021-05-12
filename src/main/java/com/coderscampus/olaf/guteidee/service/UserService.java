@@ -29,6 +29,9 @@ public class UserService {
 	public User registerNewUser(User user) {
 		user.setPassword(encoder.encode(user.getPassword()));
 		user.getAuthorities().add(new Authority("ROLE_USER", user));
+		Boolean firstUser = userRepo.findAll().isEmpty();
+		if(firstUser == true)
+			user.getAuthorities(). add(new Authority("ROLE_ADMIN", user));
 		return userRepo.save(user);
 	}
 

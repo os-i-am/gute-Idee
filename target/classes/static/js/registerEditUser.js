@@ -34,7 +34,7 @@ if (adminMode.value === 'true') {
   })
 }
 
-usernameTextbox.addEventListener('click', () => {
+usernameTextbox.addEventListener('blur', () => {
   if (usernameTextbox.value != ''
     && checkForValidEmail(usernameTextbox.value) === true) {
     var user = {

@@ -101,7 +101,7 @@ public class Idea {
 		this.completed = completed;
 	}
 
-	@OneToMany(mappedBy = "primaryKey.idea", fetch=FetchType.LAZY, cascade = { CascadeType.MERGE, CascadeType.PERSIST}, orphanRemoval = true)
+	@OneToMany(mappedBy = "primaryKey.idea", fetch=FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST}, orphanRemoval = true)
 	public Set<Like> getLikes() {
 		return likes;
 	}

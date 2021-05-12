@@ -20,6 +20,12 @@ public class Category {
 	private Long id;
 	private String title;
 	private Set<Idea> ideas = new HashSet<>();
+	
+	public Category() {}
+	
+	public Category(String title) {
+		this.title = title;
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

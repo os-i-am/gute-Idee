@@ -20,6 +20,9 @@ public class CustomSecuredUser extends User implements UserDetails {
 		this.setAuthorities(user.getAuthorities());
 	}
 
+	
+	// since this is just a demo app, I haven't implemented these methods
+	
 	@Override
 	public boolean isAccountNonExpired() {
 		return true;
