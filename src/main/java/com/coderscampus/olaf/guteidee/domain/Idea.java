@@ -110,14 +110,14 @@ public class Idea {
 		this.likes = likes;
 	}
 
-	@ManyToMany(fetch=FetchType.LAZY, cascade = CascadeType.MERGE)
+	@ManyToMany(fetch=FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
 	@JoinTable(name = "idea_category", joinColumns = @JoinColumn(name = "idea_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
 	public Set<Category> getCategories() {
 		return categories;
 	}
 
-	public void setCategories(Set<Category> set) {
-		this.categories = set;
+	public void setCategories(Set<Category> categories) {
+		this.categories = categories;
 	}
 
 	@Override

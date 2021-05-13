@@ -89,7 +89,7 @@ public class IdeaService {
 			Set<Idea> likedIdeas = ideaRepo.findAllIdeas().stream()
 					.filter(idea -> idea.getLikes().stream()
 												   .filter(like -> like.getLiked() == true) != null
-												   	 && !idea.getLikes().isEmpty())
+												   	  && !idea.getLikes().isEmpty())
 												   .collect(Collectors.toSet());
 			return likedIdeas;
 		} else if ("myLiked".equalsIgnoreCase(filter)) {
