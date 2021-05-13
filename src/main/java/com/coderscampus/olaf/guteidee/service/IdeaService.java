@@ -41,9 +41,7 @@ public class IdeaService {
 	public Idea saveNewIdea(User user, Idea idea) {
 		idea.setCompleted(false);
 		idea.setUser(userService.findById(user.getId()));
-
 		return ideaRepo.save(idea);
-
 	}
 
 	public Set<Idea> getUserIdeas(User user, String filter) {
@@ -53,9 +51,10 @@ public class IdeaService {
 			return ideaRepo.findAllCompletedIdeasByUser(user.getId());
 		else if ("liked".equalsIgnoreCase(filter)) {
 			Set<Idea> likedIdeas = ideaRepo.findAllIdeasByUser(user.getId()).stream()
-					.filter(idea -> idea.getLikes().stream().filter(like -> like.getLiked() == true) != null
-							&& !idea.getLikes().isEmpty())
-					.collect(Collectors.toSet());
+										   .filter(idea -> idea.getLikes().stream()
+												   						  .filter(like -> like.getLiked() == true) != null
+												   						  	&& !idea.getLikes().isEmpty())
+										   .collect(Collectors.toSet());
 			return likedIdeas;
 		} else if ("myLiked".equalsIgnoreCase(filter)) {
 			return ideaRepo.findAllLikedIdeasByUserId(user.getId());
@@ -88,9 +87,10 @@ public class IdeaService {
 			return ideaRepo.findAllCompletedIdeas();
 		else if ("liked".equalsIgnoreCase(filter)) {
 			Set<Idea> likedIdeas = ideaRepo.findAllIdeas().stream()
-					.filter(idea -> idea.getLikes().stream().filter(like -> like.getLiked() == true) != null
-							&& !idea.getLikes().isEmpty())
-					.collect(Collectors.toSet());
+					.filter(idea -> idea.getLikes().stream()
+												   .filter(like -> like.getLiked() == true) != null
+												   	 && !idea.getLikes().isEmpty())
+												   .collect(Collectors.toSet());
 			return likedIdeas;
 		} else if ("myLiked".equalsIgnoreCase(filter)) {
 			return ideaRepo.findAllLikedIdeasByUserId(user.getId());

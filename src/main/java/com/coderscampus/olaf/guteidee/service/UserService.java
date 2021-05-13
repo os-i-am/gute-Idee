@@ -60,9 +60,9 @@ public class UserService {
 				return userRepo.save(user);
 			} else {
 				Like delLike = user.getLikes().stream()
-						.filter(like -> like.getPrimaryKey().getIdea().getId() == ideaId
-								&& like.getPrimaryKey().getUser().getId() == inputUser.getId())
-						.findFirst().orElse(null);
+											  .filter(like -> like.getPrimaryKey().getIdea().getId() == ideaId
+											  	&& like.getPrimaryKey().getUser().getId() == inputUser.getId())
+											  .findFirst().orElse(null);
 				likeRepo.delete(delLike);
 				return null;
 			}
@@ -94,7 +94,8 @@ public class UserService {
 	}
 
 	public Boolean checkForAdmin(User editUser) {
-		return editUser.getAuthorities().stream().anyMatch(role -> role.getAuthority().equals("ROLE_ADMIN"));
+		return editUser.getAuthorities().stream()
+										.anyMatch(role -> role.getAuthority().equals("ROLE_ADMIN"));
 	}
 
 	public Boolean toggleAdmin(Long userId, Boolean isAdmin) {
@@ -104,8 +105,9 @@ public class UserService {
 			userRepo.save(user);
 			return true;
 		} else {
-			Authority admin = user.getAuthorities().stream().filter(auth -> auth.getAuthority().equals("ROLE_ADMIN"))
-					.findFirst().orElse(null);
+			Authority admin = user.getAuthorities().stream()
+												   .filter(auth -> auth.getAuthority().equals("ROLE_ADMIN"))
+												   .findFirst().orElse(null);
 			user.getAuthorities().remove(admin);
 			userRepo.save(user);
 			return false;
