@@ -35,11 +35,11 @@
         <div class="d-flex">
           <div sec:authorize="isAuthenticated()">
             <div class="row align-items-center flex-nowrap">
-              <a class="col-sm-auto text-muted text-decoration-none"
+              <a class="col-sm-auto link-secondary text-decoration-none"
                 th:href="@{'/user'}"
                 th:text="${user.name} + '\'s Profile'">Dashboard</a> <a
                 sec:authorize="hasRole('ADMIN')"
-                class="col-sm-auto text-danger text-decoration-none"
+                class="col-sm-auto link-danger text-decoration-none"
                 th:href="@{'/admin'}" th:text="'Admin Panel'">Admin
                 Dashboard</a>
               <div class="col-sm-auto">
@@ -53,7 +53,7 @@
             </div>
           </div>
           <div sec:authorize="isAnonymous()">
-            <span><a th:href="@{'/login'}" class="col-sm-auto text-muted text-decoration-none m-3">login</a></span><span><a
+            <span><a th:href="@{'/login'}" class="col-sm-auto link-secondary text-decoration-none m-3">login</a></span><span><a
               th:href="@{'/register'}" class="btn btn-outline-primary">Register</a></span>
           </div>
         </div>
@@ -97,7 +97,7 @@
   <footer class="footer mt-auto py-1 bg-light border rounded"
     th:fragment="footer">
     <span class="text-muted ms-4">&copy; 2021 | </span><a
-      class="text-primary text-decoration-none" th:href="@{'/about'}">About
+      class="link-primary text-decoration-none" th:href="@{'/about'}">About
       Gute Idee!</a>
   </footer>
 
