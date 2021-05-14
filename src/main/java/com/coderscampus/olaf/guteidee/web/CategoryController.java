@@ -36,6 +36,12 @@ public class CategoryController {
 		model.put("categories", categoryService.getAllCategories());
 		return "editCategories";
 	}
+	
+	@PostMapping("/categoryExists")
+	@ResponseBody
+	public Boolean checkIfUserExists(@RequestBody Category category) {
+		return categoryService.checkIfCategoryExists(category);
+	}
 
 	@PostMapping("/admin/editCategory")
 	@ResponseBody

@@ -40,7 +40,7 @@ usernameTextbox.addEventListener('blur', () => {
     var user = {
       'username': usernameTextbox.value
     }
-    fetch('/exists', {
+    fetch('/userExists', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -4,6 +4,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,7 +27,6 @@ public class IdeaService {
 	private UserService userService;
 
 	public Set<Idea> getAllIdeas() {
-
 		return ideaRepo.findAllIdeas();
 	}
 
@@ -37,10 +37,18 @@ public class IdeaService {
 		idea.setCategories(categoryService.getAllCategories());
 		return idea;
 	}
-
+	
+	@Transactional
 	public Idea saveNewIdea(User user, Idea idea) {
-		idea.setCompleted(false);
 		idea.setUser(userService.findById(user.getId()));
+		idea.setCompleted(false);		
+		if (idea.getCategories() != null) {
+			Set<Category> categoriesFromDB = categoryService.findByIdIn(idea.getCategories()
+															.stream()
+															.map(c -> c.getId())
+															.collect(Collectors.toList()));
+			idea.setCategories(categoriesFromDB);
+		}		
 		return ideaRepo.save(idea);
 	}
 

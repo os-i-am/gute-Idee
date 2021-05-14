@@ -1,5 +1,6 @@
 package com.coderscampus.olaf.guteidee.service;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +23,22 @@ public class CategoryService {
 	}
 
 	public Category updateCategory(Category category) {
-		return categoryRepo.save(category);
+		if (checkIfCategoryExists(category) == true)
+			return null;
+		else
+			return categoryRepo.save(category);
 	}
 
 	public void deleteCategory(Category category) {
 		categoryRepo.delete(category);
+	}
+
+	public Set<Category> findByIdIn(List<Long> categoryIds) {
+		return categoryRepo.findByIdIn(categoryIds);
+	}
+
+	public Boolean checkIfCategoryExists(Category category) {
+		return (categoryRepo.findByTitle(category.getTitle()) != null);
 	}
 
 }

@@ -51,7 +51,7 @@ public class UserController {
 		return "redirect:/user";
 	}
 
-	@PostMapping("/exists")
+	@PostMapping("/userExists")
 	@ResponseBody
 	public Boolean checkIfUserExists(@RequestBody User user) {
 		return userService.checkIfUserExists(user);

@@ -1,5 +1,6 @@
 package com.coderscampus.olaf.guteidee.repository;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -17,5 +18,7 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
 			+ " left join fetch c.ideas"
 			+ " order by c.id asc")
 	Set<Category> findAllCategories();
+
+	Set<Category> findByIdIn(List<Long> categoryIds);
 
 }
